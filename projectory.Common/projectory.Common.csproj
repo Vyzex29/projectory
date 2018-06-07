@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5D22EA00-C373-4AC2-B668-EFE24631CEB9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>projectory.Common</RootNamespace>
+    <AssemblyName>projectory.Common</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=7.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.7.0.0\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="MapperConfig\ProjectProfile.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StringConsts\AccountActions.cs" />
+    <Compile Include="StringConsts\ControllerNames.cs" />
+    <Compile Include="StringConsts\DbConnections.cs" />
+    <Compile Include="StringConsts\DefaultActions.cs" />
+    <Compile Include="StringConsts\ErrorMessages.cs" />
+    <Compile Include="StringConsts\FilePaths.cs" />
+    <Compile Include="StringConsts\HomeActions.cs" />
+    <Compile Include="StringConsts\LinkTexts.cs" />
+    <Compile Include="StringConsts\ManageActions.cs" />
+    <Compile Include="StringConsts\ManageRolesSelectListProperties.cs" />
+    <Compile Include="StringConsts\PostsActions.cs" />
+    <Compile Include="StringConsts\RenderRoutes.cs" />
+    <Compile Include="StringConsts\ReportsActions.cs" />
+    <Compile Include="StringConsts\RolesActions.cs" />
+    <Compile Include="StringConsts\StringFormats.cs" />
+    <Compile Include="StringConsts\UserRoles.cs" />
+    <Compile Include="StringConsts\UserViewSelectListColumnNames.cs" />
+    <Compile Include="StringConsts\ViewNames.cs" />
+    <Compile Include="StringConsts\WidgetSettings.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\projectory.DTO\projectory.DTO.csproj">
+      <Project>{872D2139-8CB9-4C48-B61A-DB7B8B42BD6C}</Project>
+      <Name>projectory.DTO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\projectory.Models\projectory.Models.csproj">
+      <Project>{7F025DBE-67BE-4D58-8FF2-66D6A7012C0A}</Project>
+      <Name>projectory.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
