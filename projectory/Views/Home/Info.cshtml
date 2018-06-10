@@ -1,0 +1,83 @@
+﻿@using Microsoft.AspNet.Identity
+@using projectory.Common.StringConsts
+@using Projectory.enums
+@model projectory.DTO.Web.ViewDTO.InfoPostViewDto
+
+<header class="masthead" style="background-image: url(@FilePaths.Defaultbg)">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="post-heading">
+                    <h1>@Model.IdeaDto.Title</h1>
+                    <span class="meta">Posted by @Model.IdeaDto.Author.UserName on @Model.IdeaDto.CreateOn</span>
+                    <span class="meta">Rating @Model.IdeaDto.Rating</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                @Html.Raw(Model.IdeaDto.Content)
+            </div>
+            <div class="col-lg-8 col-md-10 mx-auto">
+                @if(User.Identity.IsAuthenticated){
+                @Html.ActionLink(LinkTexts.Like, HomeActions.Rate, ControllerNames.Home, new {  postId = Model.IdeaDto.Id, type = RatingType.Like }, new { @class = "btn btn-primary" }) 
+                @Html.ActionLink(LinkTexts.Dislike, HomeActions.Rate, ControllerNames.Home, new { postId = Model.IdeaDto.Id, type = RatingType.Dislike }, new { @class = "btn btn-primary" })
+                }
+            </div>
+        </div>
+
+
+        <div>
+            @if (User.IsInRole(UserRoles.User)||User.IsInRole(UserRoles.Admin))
+            {
+                using (Html.BeginForm(HomeActions.Info, ControllerNames.Home, new { postId = Model.IdeaDto.Id }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="col-lg-8 col-md-10 mx-auto">
+                        <h4>Add Comment </h4>
+                        @Html.ValidationSummary(true, string.Empty, new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.CreateComment.Content, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.CreateComment.Content, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.CreateComment.Content, string.Empty, new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                <input type="submit" value="Create" class="btn btn-primary" />
+                            </div>
+                        </div>
+
+                    </div>
+                }
+            }
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <h3>Comments</h3>
+                @foreach (var comment in Model.Comments)
+                {
+                    <div class="form-horizontal">
+                        <div>@comment.Author.UserName</div>
+                        <div> @comment.Content</div>
+                        <div>@comment.CreateOn</div>
+                        @if (comment.Author.Id == User.Identity.GetUserId() || User.IsInRole(UserRoles.Admin))
+                        {
+                            @Html.ActionLink(LinkTexts.Edit, HomeActions.EditComment, new { id = comment.Id }, new { @class = "btn btn-primary" })
+                            @Html.ActionLink(LinkTexts.Delete, HomeActions.DeleteComment, new { id = comment.Id }, new { @class = "btn btn-primary" })
+                        }
+
+                        </div>
+                }
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+

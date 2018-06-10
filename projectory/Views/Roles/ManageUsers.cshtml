@@ -1,0 +1,56 @@
+﻿@using projectory.Common.StringConsts
+@model projectory.DTO.Web.ViewDTO.ManageRolesViewDto
+
+<div class="container">
+
+    @foreach (var user in Model.Users)
+    {
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="text-center">@user.UserName</h2>
+            </div>
+            <div class="col-lg-4 mx-auto">
+                <h2>Add Role</h2>
+
+                @using (Html.BeginForm(RolesActions.RoleAddToUser, ControllerNames.Roles, new { id = user.Id }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                    <p>
+                        Role Name: @Html.DropDownList(ManageRolesSelectListProperties.Name, Model.Roles, ManageRolesSelectListProperties.OptionaLabel)
+                    </p>
+                    <input type="submit" value="Save" />
+                }
+                <hr />
+            </div>
+            <div class="col-lg-4 mx-auto">
+                @if (user.Roles != null)
+                {
+                    <h2>User Active Roles</h2>
+                    <ol>
+                        @foreach (var s in user.Roles)
+                        {
+                            <li>@s</li>
+                        }
+                    </ol>
+                }
+
+                <hr />
+            </div>
+            <div class="col-lg-4 mx-auto">
+                <h3>Delete A Role</h3>
+
+                @using (Html.BeginForm(RolesActions.DeleteRoleForUser, ControllerNames.Roles, new { id = user.Id }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.Hidden(user.Id)
+                    <p>
+                        Role Name: @Html.DropDownList(ManageRolesSelectListProperties.Name, Model.Roles, ManageRolesSelectListProperties.OptionaLabel)
+                    </p>
+
+                    <input type="submit" value="Delete this user from Role" />
+                }
+            </div>
+        </div>
+    }
+</div>

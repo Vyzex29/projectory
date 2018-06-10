@@ -1,31 +1,54 @@
-﻿@{
-    ViewBag.Title = "Home Page";
-}
+﻿@using projectory.Common.StringConsts
+@model projectory.DTO.Web.ViewDTO.IndexViewDto
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+            @foreach (var post in Model.AllPosts)
+            {
+                <div class="post-preview">
+                    @Html.ActionLink(post.Title, HomeActions.Info, new { id = post.Id }, new { @class = "post-title" })
+                    <h3 class="post-subtitle">
+                        @Html.Raw(post.Content)
+                    </h3>
+
+                    <p class="post-meta">Posted by <a href="#">@post.Author.UserName</a> on @post.CreateOn</p>
+                    <p class="post-meta">Rating :  @post.Rating</p>
+                </div>
+                <hr>
+            }
+        </div>
+        <div class="col-lg-4 col-md-2">
+            @using (Html.BeginForm(HomeActions.Search, ControllerNames.Home, FormMethod.Get))
+            {
+                <input type="text" placeholder="Search posts by title" required name="search" />
+                <input type="submit" value="search" />
+            }
+            <div>
+                <h4>Last Commented Posts</h4>
+                @foreach (var post in Model.LastCommentedPosts)
+                {
+                    <text>|</text>@Html.ActionLink(post.Title, HomeActions.Info, new { id = post.Id })<text>|</text>
+
+                }
+            </div>
+            <div>
+                <h4>Top Rated Posts</h4>
+                @foreach (var post in Model.TopRatedPosts)
+                {
+                    <text>|</text>@Html.ActionLink(post.Title, HomeActions.Info, new { id = post.Id }) <text>|</text>
+
+                }
+            </div>
+            <div>
+                <h4>Latest Posts</h4>
+                @foreach (var post in Model.LastPosts)
+                {
+                    <text>|</text> @Html.ActionLink(post.Title, HomeActions.Info, new { id = post.Id })<text>|</text>
+                }
+            </div>
+        </div>
+    </div>
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>

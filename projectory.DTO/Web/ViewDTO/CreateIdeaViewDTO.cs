@@ -21,7 +21,7 @@ namespace projectory.DTO.Web.ViewDTO
 
         public string AuthorId { get; set; }
 
-        public DateTime? CreateOn { get; set; }
+        public DateTime? CreatedOn { get; set; }
 
         public bool IsDeleted { get; set; }
 

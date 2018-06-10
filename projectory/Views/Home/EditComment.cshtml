@@ -1,0 +1,32 @@
+﻿@using projectory.Common.StringConsts
+@model projectory.DTO.Web.ViewDTO.CreateCommentViewDto
+
+@using (Html.BeginForm(HomeActions.EditComment, ControllerNames.Home, new { Model.IdeaId }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.CreateOn)
+    @Html.HiddenFor(model => model.AuthorId)
+    <div class="col-lg-8 col-md-10 mx-auto">
+        <h4>Add Comment </h4>
+
+
+        @Html.ValidationSummary(true, string.Empty, new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Content, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Content, string.Empty, new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" value="Edit" class="btn btn-primary" />
+                @Html.ActionLink(LinkTexts.BackToPost, HomeActions.Info, new { id = Model.PostId }, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+
+    </div>
+}

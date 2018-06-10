@@ -59,6 +59,8 @@
     <Compile Include="repository\Idea.cs" />
     <Compile Include="repository\Rating.cs" />
     <Compile Include="repository\UserAvatar.cs" />
+    <Compile Include="Web\ViewModels\AccountViewModels.cs" />
+    <Compile Include="Web\ViewModels\ManageViewModels.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

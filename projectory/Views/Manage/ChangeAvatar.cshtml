@@ -1,0 +1,38 @@
+﻿@using SimpBlog.Common.StringConsts
+@model SimpBlog.DTO.Web.ViewDTO.AvatarViewDto
+
+<header class="masthead" style="background-image: url(@FilePaths.Defaultbg)">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="site-heading">
+                    <h1>ChangeAvatar</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+            @using (Html.BeginForm(ManageActions.ChangeAvatar, ControllerNames.Manage, FormMethod.Post, new {enctype="multipart/form-data", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <h4>Change Avatar Form</h4>
+                <hr />
+                @Html.ValidationSummary(string.Empty, new { @class = "text-danger" })
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <input type="file" id="imageFile" name="imageFile" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="mx-auto col-md-10">
+                        <input type="submit" value="Change avatar" class="btn btn-default" />
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

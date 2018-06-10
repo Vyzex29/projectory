@@ -144,9 +144,11 @@ namespace projectory.Services.Contracts
 
         public void AddCreatedPost(CreateIdeaViewDto idea)
         {
-            idea.AuthorId = _identityFacade.GetUserId();
-            idea.CreateOn = DateTime.Now;
+            var authorId = _identityFacade.GetUserId();
+            var user = _userRepo.Find(authorId);
             var dbPost = Mapper.Map<Idea>(idea);
+            dbPost.Author = user;
+            dbPost.CreatedOn=DateTime.Now;
             _ideaRepo.Add(dbPost);
         }
 

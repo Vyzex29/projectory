@@ -17,6 +17,7 @@ namespace projectory.Facades.Identity
         public string GetUserId()
         {
             return _context.User.Identity.GetUserId();
+
         }
     }
 }

@@ -1,11 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@using projectory.Common.StringConsts
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    <title> @LinkTexts.SiteName</title>
 
 </head>
 <body>
@@ -17,28 +16,35 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink(LinkTexts.SiteName, DefaultActions.Index, ControllerNames.Home, new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li class="nav-item">
+                        @Html.ActionLink(LinkTexts.Home, DefaultActions.Index, ControllerNames.Home)
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink(LinkTexts.PostPanel, DefaultActions.Index, ControllerNames.Ideas, null, new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink(LinkTexts.RoleManager, RolesActions.ManageUsers, ControllerNames.Roles, null, new { @class = "nav-link" })
+                    </li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
-
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+    @RenderBody()
+    <footer>
+        <div class="container">
+            <div class="row">
+                <p class="copyright text-muted">Copyright &copy; Kurumi best waifu, fight me</p>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
+@Styles.Render(RenderRoutes.ContentCss)
+@Scripts.Render(RenderRoutes.BootstrapBundle)
+@Scripts.Render(RenderRoutes.JQueryVal)
+@RenderSection("scripts", required: false)

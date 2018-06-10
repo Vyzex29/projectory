@@ -15,9 +15,9 @@ namespace projectory.Common.StringConsts
         public const string CreateNewPost = "Create New";
         public const string Edit = "Edit";
         public const string Delete = "Delete";
-        public const string SiteName = "Neckich";
+        public const string SiteName = "IdeaBank";
         public const string Home = "Home";
-        public const string PostPanel = "Posts panel";
+        public const string PostPanel = "Ideas panel";
         public const string Greeting = "Hello! ";
         public const string Register = "Register";
         public const string LogIn = "Log In";
